@@ -55,7 +55,8 @@ console.log(contentArr.join("\r\n"));
 let nExist=optionsArr.includes("-n");
 if(nExist){
     for(let i=0;i<contentArr.length;i++){
-        contentArr[i]=`${i+1} ${contentArr[i]}`
+        contentArr[i]=`${i+1} ${contentArr[i]}`;
+        
     }
 }
 console.log(contentArr.join("\r\n"));
