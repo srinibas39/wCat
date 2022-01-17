@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const fs=require("fs");
 let input=process.argv.slice(2);
 // console.log(input);
@@ -26,9 +27,17 @@ for(let i=0;i<filesArr.length;i++){
     content+=buffer+"\r\n";
 }
 
-// console.log(content);
+console.log(content);
 let contentArr=content.split("\r\n");
 // console.log(contentArr);
+
+// If file is not present in the current directory=>error
+for(let i=0;i<filesArr.length;i++){
+    if(!fs.existsSync(filesArr[i])){
+        console.log(`file ${filesArr[i]} is not present`);
+        return;
+    }
+}
 
 //implement -s
 let isSpresent=optionsArr.includes("-s");
@@ -41,14 +50,23 @@ if(isSpresent){
             contentArr[i]=null;
         }
     }
+    console.log(contentArr);
+    contentArr=contentArr.filter((ele)=>{
+        return ele!=null
+    })
+    console.log("------------------");
+    console.log(contentArr.join("\r\n"));
+    
 }
- console.log(contentArr);
 
-contentArr=contentArr.filter((ele)=>{
-    return ele!=null
-})
-console.log("------------------");
-console.log(contentArr.join("\r\n"));
+
+// If both -n and -b is present then give an error message.
+
+let isBothPresent=optionsArr.includes("-b") && optionsArr.includes("-n");
+if(isBothPresent){
+    console.log("Either enter -b or -n");
+    return;
+}
 
 //implement -n
 
@@ -58,8 +76,8 @@ if(nExist){
         contentArr[i]=`${i+1} ${contentArr[i]}`;
         
     }
+    console.log(contentArr.join("\r\n"));
 }
-console.log(contentArr.join("\r\n"));
 
 //implement -b;
 
@@ -73,6 +91,10 @@ if(bExist){
         }
         
     }
+    console.log(contentArr.join("\r\n"));
 }
 
-console.log(contentArr.join("\r\n"));
+
+
+
+
