@@ -60,3 +60,19 @@ if(nExist){
     }
 }
 console.log(contentArr.join("\r\n"));
+
+//implement -b;
+
+let bExist=optionsArr.includes("-b");
+if(bExist){
+    let counter=1;
+    for(let i=0;i<contentArr.length;i++){
+        if(contentArr[i]!=""){
+            contentArr[i]=`${counter} ${contentArr[i]}`;
+            counter++;
+        }
+        
+    }
+}
+
+console.log(contentArr.join("\r\n"));
